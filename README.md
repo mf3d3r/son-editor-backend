@@ -3,87 +3,97 @@
 
 # son-editor-backend
 
+This is the backend of SONATA's web-based service and function descriptor editor. It serves as the data storage for the editor and interacts with all other services that are needed to create, update and release SONATA Service and VNF descriptors. It is designed to be used with the [son-editor-frontend](https://github.com/sonata-nfv/son-editor-frontend) but because all interaction and communication is taking place through a RESTful API, it is possible to be used with other user interfaces.
+
 ## Installation
+
+The editor (frontend and backend) can be installed and deployed as single Docker container and a docker-compose script.
+
+1. Since the editor uses OAuth to authenticate its users, a OAuth application token is required to run it. To retrieve such a token (from GitHub), go to Github Settings > [OAuth applications](https://github.com/settings/developers) and 'Register a new application'.
+  * Chose an application name: `SONATA Editor`
+  * Configure the URL of your installation: `http://localhost/` or `http://your-domain.com`
+  * Configure the authentication callback URL: `http://localhost/backend/login` or `http://your-domain.com/backend/login`
+  * `Save` and collect the generated `ClientID` and `ClientSecretnt` for step 4
+2. Clone this repository:
+ * `git clone https://github.com/sonata-nfv/son-editor-backend`
+3. Switch to `build-docker` folder:
+ * `cd son-editor-backend/build-docker/`
+4. Add GitHub OAuth `ClientID` and `ClientSecret` to `config.yaml`
+ * `vim config.yaml`
+5. Build and run container:
+ * `docker-compose up`
+
+Open your web browser and point to your server / local machine, e.g., `http://127.0.0.1/` and login to the editor using your GitHub account.
 
 ## Development
 
+### Python environment
+We recommend using [venv](https://docs.python.org/dev/tutorial/venv.html). If you have setup your Python 3 environment, open a shell in your virtual environment
+and install [son-cli:v2](https://github.com/sonata-nfv/son-cli/tree/v2.0).
+
+* `pip install git+https://github.com/sonata-nfv/son-cli.git@v2.0`
+* `python setup.py install`
+* `python setup.py develop`
+
+To re-build the container:
+
+* Do `docker-compose build --no-cache` in `build-docker/`
+
 ### Testing
 
-### Continous Integration
+* Configuration file used during tests: `src/son_editor/config.yaml`
+* Run tests: `python setup.py test`
+
+### Continuous Integration
+
+All SONATA projects are automatically tested with SONATA's Jenkins CI environment. But this editor is an exception to this and uses a Travis CI job that is configured in `.travis`.
 
 ## Dependencies
 
+* [son-cli](https://github.com/sonata-nfv/son-cli) >= 2.0
+* [flask-restplus](https://pypi.python.org/pypi/flask-restplus) ==0.9.2
+* [flask](https://pypi.python.org/pypi/Flask) == 0.12
+* [sqlalchemy](https://pypi.python.org/pypi/SQLAlchemy) == 1.1.6
+* [requests](ttps://pypi.python.org/pypi/requests) == 2.13.0
+* [pyaml](https://pypi.python.org/pypi/pyaml) == 16.12.2
+
 ## Contributing
+
+Contributing to the son-editor is really easy. You must:
+
+1. Clone [this repository](http://github.com/sonata-nfv/son-editor-backend);
+2. Work on your proposed changes, preferably through submiting [issues](https://github.com/sonata-nfv/son-editor-backend/issues);
+3. Submit a Pull Request;
+4. Follow/answer related [issues](https://github.com/sonata-nfv/son-editor-backend/issues) (see Feedback-Chanel, below).
 
 ## Further Documentation
 
+You can find the editor's manual [here](https://github.com/sonata-nfv/son-editor-backend/raw/master/technical_document_editor.pdf).
+
+The server code is documented using sphinx: [documentation](https://cn-upb.github.io/upb-son-editor-backend/).
+
 ## License
+
+Son-editor is published under Apache 2.0 license. Please see the LICENSE file for more details.
 
 ## Lead Developers
 
+The following lead developers are responsible for this repository and have admin rights. They can, for example, merge pull requests.
+
+* Manuel Peuster (https://github.com/mpeuster)
+
 ## Contributors
+
+* Hadi Razzaghi Kouchaksaraei (https://github.com/hadik3r)
+* Sevil Dräxler (https://github.com/mehraghdam)
+* Jonas Manuel
+* Christian Korfmacher
+* Linghui Luo
+* Kulkarni, Surendra
+
 
 ## Feedback-Channel
 
+* You may use the mailing list [sonata-dev@lists.atosresearch.eu](mailto:sonata-dev@lists.atosresearch.eu)
+* [GitHub issues](https://github.com/sonata-nfv/son-editor-backend/issues)
 
-######################
-
-Student project group's network service editor backend.
-
-The backend serves as the data storage for the editor and interacts with all other services that are needed to create, update and release SONATA Service and VNF descriptors. It is designed to be used with the [son-editor-frontend](https://github.com/sonata-nfv/son-editor-frontend) but because all interaction and communication is taking place through a RESTful API, it should also be possible to be used with other user interfaces.
-
-The API can be viewed from [the root directory of the backend](http://fg-cn-sandman1.cs.upb.de:5000/)
-
-## Installation
-
-The easiest way to install and run the Editor Backend is by using [docker](https://www.docker.com/) and [docker-compose](https://docs.docker.com/compose/):
-
-1. Download the repository
-  * `git clone https://github.com/sonata-nfv/son-editor-backend`
-2. Configuration  
-  To use the Github OAuth login feature, an application token must be created and configured in the editor.  
-  To do this go to your Github Settings > [OAuth applications](https://github.com/settings/developers) and 'Register a new application'  
-  **Example:**  
-    **Application Name:** SONATA Editor  
-    **Homepage URL:** https://github.com/sonata-nfv/son-editor-backend  
-    **Application description:** This is the SONATA Editor  
-    **Authorization callback URL:** http://your.domain.com:<b>5000/login</b>  
-    
-  After creating the application copy and paste the ClientID and the Client Secret into their respective fields in the configuration file located at [src\son_editor\config.yaml](src/son_editor/config.yaml)  
-  **session > secretKey:**  A random string used to encrypt the session  
-  **frontend-redirect:** "/loginRedirect.html" the path to the loginRedirect.html page of the frontend editor that will be opened after the Github authentication.  
-  **frontend-host:** The domain and possibly port of the frontend server  
-  **allowed-hosts:** If the front and backend are deployed on different domains, the frontend domain must be listed here
-  
-  The standard port for the editor backend when starting it via `docker-compose` is **5000**. If the port is changed, also the port of the **Authoritzaion callback URL** must be changed.
-3. Deploy  
-  To deploy the editor start the docker container by running `docker-compose up -d' in the root of the project.  
-4. Enjoy  
-  The backend server is now running at your configured domain and will provide a documented api description at the root path. E.g.  http://your.domain.com:5000
-  
-For instructions on how to setup the web frontend of the editor please visit https://github.com/sonata-nfv/son-editor-frontend for more information.
-
-
-## Development configuration
-### Python environment
-We recommend using [venv](https://docs.python.org/dev/tutorial/venv.html). If you have setup your python 3 environment, open a shell in your virtual environment
-and install [son-cli:v2](https://github.com/sonata-nfv/son-cli/tree/v2.0).
-
-### Test configuration
- 
-Edit config.yaml and fill in the requested values under the test section. If you are using travis ci or another build server, note that the github credentials to 
-test github configuration can be set as environment variables "github_bot_user" and "github_access_token".
-If you leave out test configuration, some tests will eventually fail. 
-
-## Manual Updates
- To update the editor backend just run  
-  `docker-compose down`  
-  `git pull`  
-  `docker-compose build --no-cache`  
-  `docker-compose up -d`
-
-### Known Issues:
-If the database design changes it may happen that the automated deployment fails due to the old database not conforming to the new schema. If this is the case, the docker container should be torn down and rebuild as described in the Manual Update section. The data is preserved by writing the descriptors onto disk and the database will automatically be rebuilt by scanning the workspaces on startup.
-  
-## Documentation
-The server code is documented using sphinx: [documentation](https://cn-upb.github.io/upb-son-editor-backend/)
