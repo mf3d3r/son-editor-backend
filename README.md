@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/sonata-nfv/son-editor-backend.svg?branch=master)]
+[![Build Status](https://travis-ci.org/sonata-nfv/son-editor-backend.svg?branch=master)](https://travis-ci.org/sonata-nfv/son-editor-backend.svg?branch=master)
 
 
 # son-editor-backend
