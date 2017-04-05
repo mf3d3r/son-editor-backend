@@ -5,7 +5,7 @@
 
 This is the backend of SONATA's web-based service and function descriptor editor. It serves as the data storage for the editor and interacts with all other services that are needed to create, update and release SONATA Service and VNF descriptors. It is designed to be used with the [son-editor-frontend](https://github.com/sonata-nfv/son-editor-frontend) but because all interaction and communication is taking place through a RESTful API, it is possible to be used with other user interfaces.
 
-![son-editor screenshot](https://github.com/sonata-nfv/son-editor-frontend/raw/master/screenshot_network_editor.png "Screenshot of son-editor's NSD editor view" | width=400)
+![son-editor screenshot](https://github.com/sonata-nfv/son-editor-frontend/raw/master/screenshot_network_editor.png "Screenshot of son-editor's NSD editor view")
 
 ## Installation
 
