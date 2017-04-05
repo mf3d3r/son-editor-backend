@@ -2,6 +2,32 @@
 
 
 # son-editor-backend
+
+## Installation
+
+## Development
+
+### Testing
+
+### Continous Integration
+
+## Dependencies
+
+## Contributing
+
+## Further Documentation
+
+## License
+
+## Lead Developers
+
+## Contributors
+
+## Feedback-Channel
+
+
+######################
+
 Student project group's network service editor backend.
 
 The backend serves as the data storage for the editor and interacts with all other services that are needed to create, update and release SONATA Service and VNF descriptors. It is designed to be used with the [son-editor-frontend](https://github.com/sonata-nfv/son-editor-frontend) but because all interaction and communication is taking place through a RESTful API, it should also be possible to be used with other user interfaces.
