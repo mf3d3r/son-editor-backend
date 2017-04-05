@@ -82,6 +82,7 @@ class GitAPITest(unittest.TestCase):
         self.assertTrue(response.status_code, 400)
 
     # Test section
+    @unittest.skip("deactivated")
     def test_init_and_create_remote_repo(self):
         # 1. init git repository in the given project
         arg = {'project_id': self.pjid}
@@ -93,6 +94,7 @@ class GitAPITest(unittest.TestCase):
         response = self.call_github_post('create', arg)
         self.assertResponseValid(response)
 
+    @unittest.skip("deactivated")
     def test_pull(self):
         self.test_init_and_create_remote_repo()
         # Already up to date
@@ -105,6 +107,7 @@ class GitAPITest(unittest.TestCase):
         response = self.call_github_post('pull', arg)
         self.assertInvalidArgument(response)
 
+    @unittest.skip("deactivated")
     def test_clone_and_delete_repo(self):
         # 1. Init and create remote repo
         self.test_init_and_create_remote_repo()
@@ -131,6 +134,7 @@ class GitAPITest(unittest.TestCase):
                                    data=json.dumps(arg))
         self.assertResponseValid(response)
 
+    @unittest.skip("deactivated")
     def test_clone_invalid_son_repo(self):
         # Format invalid project url
         arg = {'url': '{}/{}/{}'.format(GITHUB_URL, GITHUB_USER, REMOTE_INVALID_REPO_NAME)}
@@ -142,6 +146,7 @@ class GitAPITest(unittest.TestCase):
         response = self.call_github_post('clone', arg)
         self.assertInvalidArgument(response)
 
+    @unittest.skip("deactivated")
     def test_invalid_delete(self):
         arg = {'project_id': 999, 'repo_name': REMOTE_DOES_NOT_EXIST_REPO_NAME}
         response = self.app.delete("/" + constants.WORKSPACES + "/" + self.wsid + "/" + constants.GIT + "/delete",
@@ -149,12 +154,14 @@ class GitAPITest(unittest.TestCase):
                                    data=json.dumps(arg))
         self.assertInvalidArgument(response)
 
+    @unittest.skip("deactivated")
     def test_status(self):
         self.test_init_and_create_remote_repo()
         arg = {'project_id': self.pjid}
         response = self.call_github_post('status', arg)
         self.assertResponseValid(response)
 
+    @unittest.skip("deactivated")
     def test_diff(self):
         self.test_init_and_create_remote_repo()
         arg = {'project_id': self.pjid}

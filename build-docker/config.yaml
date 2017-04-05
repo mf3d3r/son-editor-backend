@@ -1,6 +1,6 @@
 authentication:
-    ClientID: create OAuth application on github
-    ClientSecret: OAuth application secret here
+    ClientID: "e2356cfefb349c95277d"
+    ClientSecret: "270d2a3cb1d1fdfcfad6d7f4441b0ef5f964033c"
 
 
 session:
