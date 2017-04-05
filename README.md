@@ -1,4 +1,4 @@
-<!--![alt tag](https://api.travis-ci.org/CN-UPB/upb-son-editor-backend.svg)-->
+[alt tag](https://travis-ci.org/sonata-nfv/son-editor-backend.svg?branch=master)
 
 
 # son-editor-backend
