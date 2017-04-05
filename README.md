@@ -5,23 +5,25 @@
 
 This is the backend of SONATA's web-based service and function descriptor editor. It serves as the data storage for the editor and interacts with all other services that are needed to create, update and release SONATA Service and VNF descriptors. It is designed to be used with the [son-editor-frontend](https://github.com/sonata-nfv/son-editor-frontend) but because all interaction and communication is taking place through a RESTful API, it is possible to be used with other user interfaces.
 
+![son-editor screenshot](https://github.com/sonata-nfv/son-editor-frontend/raw/master/screenshot_network_editor.png "Screenshot of son-editor's NSD editor view")
+
 ## Installation
 
 The editor (frontend and backend) can be installed and deployed as single Docker container and a docker-compose script.
 
-1. Since the editor uses OAuth to authenticate its users, a OAuth application token is required to run it. To retrieve such a token (from GitHub), go to Github Settings > [OAuth applications](https://github.com/settings/developers) and 'Register a new application'.
-  * Chose an application name: `SONATA Editor`
-  * Configure the URL of your installation: `http://localhost/` or `http://your-domain.com`
-  * Configure the authentication callback URL: `http://localhost/backend/login` or `http://your-domain.com/backend/login`
-  * `Save` and collect the generated `ClientID` and `ClientSecretnt` for step 4
+1. Since the editor uses OAuth to authenticate its users, a OAuth application token is required to run it. To retrieve such a token (from GitHub), go to [GitHub Settings > OAuth applications](https://github.com/settings/developers) and 'Register a new application'.
+    * Chose an application name: `SONATA Editor`
+    * Configure the URL of your installation: `http://localhost/` or `http://your-domain.com`
+    * Configure the authentication callback URL: `http://localhost/backend/login` or `http://your-domain.com/backend/login`
+    * `Save` and collect the generated `ClientID` and `ClientSecretnt` for step 4
 2. Clone this repository:
- * `git clone https://github.com/sonata-nfv/son-editor-backend`
+    * `git clone https://github.com/sonata-nfv/son-editor-backend`
 3. Switch to `build-docker` folder:
- * `cd son-editor-backend/build-docker/`
+    * `cd son-editor-backend/build-docker/`
 4. Add GitHub OAuth `ClientID` and `ClientSecret` to `config.yaml`
- * `vim config.yaml`
+    * `vim config.yaml`
 5. Build and run container:
- * `docker-compose up`
+    * `docker-compose up`
 
 Open your web browser and point to your server / local machine, e.g., `http://127.0.0.1/` and login to the editor using your GitHub account.
 
@@ -54,7 +56,7 @@ All SONATA projects are automatically tested with SONATA's Jenkins CI environmen
 * [flask-restplus](https://pypi.python.org/pypi/flask-restplus) ==0.9.2
 * [flask](https://pypi.python.org/pypi/Flask) == 0.12
 * [sqlalchemy](https://pypi.python.org/pypi/SQLAlchemy) == 1.1.6
-* [requests](ttps://pypi.python.org/pypi/requests) == 2.13.0
+* [requests](https://pypi.python.org/pypi/requests) == 2.13.0
 * [pyaml](https://pypi.python.org/pypi/pyaml) == 16.12.2
 
 ## Contributing
@@ -89,7 +91,7 @@ The following lead developers are responsible for this repository and have admin
 * Jonas Manuel
 * Christian Korfmacher
 * Linghui Luo
-* Kulkarni, Surendra
+* Surendra Kulkarni
 
 
 ## Feedback-Channel
