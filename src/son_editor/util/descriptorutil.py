@@ -2,7 +2,7 @@ import json
 import os
 
 import yaml
-from urllib import request
+import requests
 
 from son_editor.util.requestutil import get_config
 
@@ -195,18 +195,22 @@ def load_schemas():
     """ Loads the schemas congigured under "schemas" from the schema remotes """
     schemas[SCHEMA_ID_VNF] = []
     schemas[SCHEMA_ID_NS] = []
+
+    s = requests.session()
+
     for schema in get_config()["schemas"]:
         # load vnf schema
         vnf_schema = dict(schema)
-        response = request.urlopen(vnf_schema['url'] + "function-descriptor/vnfd-schema.yml")
-        data = response.read()
-        vnf_schema['schema'] = yaml.safe_load(data.decode('utf-8'))
+        response = s.get(vnf_schema['url'] + "function-descriptor/vnfd-schema.yml")
+        data = response.text
+        vnf_schema['schema'] = yaml.safe_load(data)
         schemas[SCHEMA_ID_VNF].append(vnf_schema)
+
         # load ns schema
         ns_schema = dict(schema)
-        response = request.urlopen(ns_schema['url'] + "service-descriptor/nsd-schema.yml")
-        data = response.read()
-        ns_schema['schema'] = yaml.safe_load(data.decode('utf-8'))
+        response = s.get(vnf_schema['url'] + "service-descriptor/nsd-schema.yml")
+        data = response.text
+        ns_schema['schema'] = yaml.safe_load(data)
         schemas[SCHEMA_ID_NS].append(ns_schema)
 
 
