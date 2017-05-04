@@ -67,7 +67,7 @@ def push_to_platform(package_path: str, ws: Workspace) -> str:
         #out = out[start_index:end_index + 1]
         #uuid = out
         # we need to find a reliable way to find the uuid (only needed for log printing)
-        uuid = ''
+        uuid = 'service_uuid: check in platform'
         return uuid
     elif "error" in out.lower() or "error" in err.lower():
         raise NameConflict("Out: " + out + "Error: " + err)
