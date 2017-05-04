@@ -62,10 +62,12 @@ def push_to_platform(package_path: str, ws: Workspace) -> str:
     if "ConnectionError" in out or "ConnectionError" in err:
         raise ExtNotReachable("Could not connect to platform.")
     elif "201" in out:
-        start_index = out.index('"service_uuid":')
-        end_index = out.index(',', start_index)
-        out = out[start_index:end_index + 1]
-        uuid = out
+        #start_index = out.index('"service_uuid":')
+        #end_index = out.index(',', start_index)
+        #out = out[start_index:end_index + 1]
+        #uuid = out
+        # we need to find a reliable way to find the uuid (only needed for log printing)
+        uuid = ''
         return uuid
     elif "error" in out.lower() or "error" in err.lower():
         raise NameConflict("Out: " + out + "Error: " + err)
