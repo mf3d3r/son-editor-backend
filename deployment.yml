@@ -1,0 +1,21 @@
+github-token: "please generate 'Personal Access Token' at Github.com"
+github-secret: "randomSecretString(set as secret in webhook config)"
+
+environment_url: http://fg-cn-sandman1.cs.upb.de/src/homeView.html
+
+deployment-script:
+  #sends a deployment pending status to github
+  - update-status: "starting deployment"
+  #make an http request
+#  - run:
+#    #sync: wait for termination
+#    sync: 'git stash'
+  - run: "updating code from repository"
+    sync: 'git pull'
+#  - run:
+#    sync: 'git stash pop'
+  - run: "installing changed requirements"
+    sync: 'pip install -e .'
+  - run: "reloading son editor"
+    sync: 'uwsgi --reload /tmp/project-master.pid'
+ 
