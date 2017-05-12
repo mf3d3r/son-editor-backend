@@ -34,7 +34,10 @@ def pack_project(project: Project) -> str:
     else:
         for line in err.splitlines():
             if line.find("ERROR") >= 0:
+                if "Public Key" in line[line.find("ERROR"):]:
+                    continue  # TODO remove this shortcut once son-cli changes this to WARNING
                 error_message = line[line.find("ERROR"):]
+                logger.error(err)
                 raise PackException(error_message)
     raise PackException(err)
 
