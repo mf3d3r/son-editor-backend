@@ -13,7 +13,8 @@ COPY ./constants.js /var/www/js/constants.js
 
 #install the son-editor-backend
 RUN rm -rf /app
-RUN git clone https://github.com/sonata-nfv/son-editor-backend.git /app
+#RUN git clone https://github.com/sonata-nfv/son-editor-backend.git /app
+COPY . /app
 WORKDIR /app
 RUN pip install -e .
 COPY ./config.yaml /app/src/son_editor/config.yaml
