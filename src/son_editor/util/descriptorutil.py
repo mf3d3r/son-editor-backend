@@ -157,7 +157,10 @@ def sync_project_descriptor(project) -> None:
     :param project: The projects database model
     """
     project_descriptor = load_project_descriptor(project)
-    project_descriptor_pkg = project_descriptor['package']
+    if 'package' in project_descriptor:
+        project_descriptor_pkg = project_descriptor['package']
+    else:
+        project_descriptor['package'] = dict()
     project_descriptor_pkg['name'] = project.name
     if project.description is not None:
         project_descriptor_pkg['description'] = project.description
