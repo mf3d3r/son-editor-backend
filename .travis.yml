@@ -2,7 +2,6 @@ language: python
 python:
   - "3.5"
 before_install:
-# - pip install git+https://github.com/CN-UPB/son-cli.git@v2.0
   - pip install git+https://github.com/sonata-nfv/son-cli.git@v2.0
 install:
   - "python setup.py install"
