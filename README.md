@@ -25,7 +25,7 @@ The editor (frontend and backend) can be installed and deployed as single Docker
 5. Build and run container:
     * `docker-compose up`
 
-Open your web browser and point to your server / local machine, e.g., `http://127.0.0.1/` and login to the editor using your GitHub account.
+Open your web browser and point to your server / local machine, e.g., `http://localhost/` and login to the editor using your GitHub account.
 
 ## Development
 

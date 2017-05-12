@@ -1,8 +1,11 @@
-FROM pgsandman2016/upb-son-editor-backend-base:v1
+FROM tiangolo/uwsgi-nginx-flask:flask-python3.5
 
 #install infconfig
 RUN apt-get update
 RUN apt-get install -y net-tools
+
+# install son-cli
+RUN pip install git+https://github.com/sonata-nfv/son-cli.git
 
 #install the son-editor-frontend
 RUN git clone https://github.com/sonata-nfv/son-editor-frontend /var/www/
