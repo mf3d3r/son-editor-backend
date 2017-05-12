@@ -1,6 +1,6 @@
 authentication:
-    ClientID: create OAuth application on github
-    ClientSecret: OAuth application secret here
+    ClientID: <PUT CLIENT ID HERE>
+    ClientSecret: <PUT CLIENT  SECRET HERE>
 
 
 session:
