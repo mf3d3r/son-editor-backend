@@ -1,17 +1,8 @@
 version: '2'
 services:
-    son-editor-instance:
+    son-editor:
         build: .
         ports:
-            - "5000:5000"
-            - "443:443"
-            # uncomment to activate auto-update-script
-            # - "5050:5050"
+            - 80:80
         volumes:
-            - ./src/son_editor/config.yaml:/app/src/son_editor/config.yaml
-            - ./son-editor/workspaces:/root/son-editor/workspaces
-            - ./deployment.yml:/app/deployment.yml
-            # uncomment to enable ssl-configuration
-            # - /etc/letsencrypt/archive/fg-cn-sandman1.cs.upb.de/fullchain1.pem:/certs/fullchain.pem
-            # - /etc/letsencrypt/archive/fg-cn-sandman1.cs.upb.de/privkey1.pem:/certs/privkey.pem
-            # - ./ssl-nginx.conf:/etc/nginx/conf.d/nginx.conf
+            - ./workspaces:/root/son-editor/workspaces
