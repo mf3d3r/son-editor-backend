@@ -18,14 +18,14 @@ The editor (frontend and backend) can be installed and deployed as single Docker
     * `Save` and collect the generated `ClientID` and `ClientSecretnt` for step 4
 2. Clone this repository:
     * `git clone https://github.com/sonata-nfv/son-editor-backend`
-3. Switch to `build-docker` folder:
-    * `cd son-editor-backend/build-docker/`
+3. Switch to `son-editor-backend` folder:
+    * `cd son-editor-backend/`
 4. Add GitHub OAuth `ClientID` and `ClientSecret` to `config.yaml`
     * `vim config.yaml`
 5. Build and run container:
     * `docker-compose up`
 
-Open your web browser and point to your server / local machine, e.g., `http://127.0.0.1/` and login to the editor using your GitHub account.
+Open your web browser and point to your server / local machine, e.g., `http://localhost/` and login to the editor using your GitHub account.
 
 ## Development
 
@@ -33,13 +33,13 @@ Open your web browser and point to your server / local machine, e.g., `http://12
 We recommend using [venv](https://docs.python.org/dev/tutorial/venv.html). If you have setup your Python 3 environment, open a shell in your virtual environment
 and install [son-cli:v2](https://github.com/sonata-nfv/son-cli/tree/v2.0).
 
-* `pip install git+https://github.com/sonata-nfv/son-cli.git@v2.0`
+* `pip install git+https://github.com/sonata-nfv/son-cli.git`
 * `python setup.py install`
 * `python setup.py develop`
 
 To re-build the container:
 
-* Do `docker-compose build --no-cache` in `build-docker/`
+* Do `docker-compose build --no-cache`
 
 ### Testing
 
@@ -52,7 +52,7 @@ All SONATA projects are automatically tested with SONATA's Jenkins CI environmen
 
 ## Dependencies
 
-* [son-cli](https://github.com/sonata-nfv/son-cli) >= 2.0
+* [son-cli](https://github.com/sonata-nfv/son-cli) >= 2.1
 * [flask-restplus](https://pypi.python.org/pypi/flask-restplus) ==0.9.2
 * [flask](https://pypi.python.org/pypi/Flask) == 0.12
 * [sqlalchemy](https://pypi.python.org/pypi/SQLAlchemy) == 1.1.6

@@ -27,8 +27,6 @@ database:
 
 # URL to sonata schemas
 schemas:
-  - name: CN-UPB
-    url: https://raw.githubusercontent.com/CN-UPB/son-schema/master/
   - name: SONATA NFV
     url: https://raw.githubusercontent.com/sonata-nfv/son-schema/master/
 

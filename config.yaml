@@ -1,6 +1,6 @@
 authentication:
-    ClientID: create OAuth application on github
-    ClientSecret: OAuth application secret here
+    ClientID: <PUT CLIENT ID HERE>
+    ClientSecret: <PUT CLIENT  SECRET HERE>
 
 
 session:
@@ -24,7 +24,5 @@ testing: False
 
 # URL to sonata schemas
 schemas:
-  - name: CN-UPB
-    url: https://raw.githubusercontent.com/CN-UPB/son-schema/master/
   - name: SONATA NFV
     url: https://raw.githubusercontent.com/sonata-nfv/son-schema/master/

@@ -2,7 +2,7 @@ import json
 import os
 
 import yaml
-from urllib import request
+import requests
 
 from son_editor.util.requestutil import get_config
 
@@ -157,36 +157,42 @@ def sync_project_descriptor(project) -> None:
     :param project: The projects database model
     """
     project_descriptor = load_project_descriptor(project)
-    project_descriptor['name'] = project.name
+    if 'package' in project_descriptor:
+        project_descriptor_pkg = project_descriptor['package']
+    else:
+        project_descriptor['package'] = dict()
+    project_descriptor_pkg['name'] = project.name
     if project.description is not None:
-        project_descriptor['description'] = project.description
-    elif 'description' in project_descriptor:
-        project.description = project_descriptor['description']
+        project_descriptor_pkg['description'] = project.description
+    elif 'description' in project_descriptor_pkg:
+        project.description = project_descriptor_pkg['description']
 
     if project.maintainer is not None:
-        project_descriptor['maintainer'] = project.maintainer
-    elif 'maintainer' in project_descriptor:
-        project.maintainer = project_descriptor['maintainer']
+        project_descriptor_pkg['maintainer'] = project.maintainer
+    elif 'maintainer' in project_descriptor_pkg:
+        project.maintainer = project_descriptor_pkg['maintainer']
 
     if project.vendor is not None:
-        project_descriptor['vendor'] = project.vendor
-    elif 'vendor' in project_descriptor:
-        project.vendor = project_descriptor['vendor']
+        project_descriptor_pkg['vendor'] = project.vendor
+    elif 'vendor' in project_descriptor_pkg:
+        project.vendor = project_descriptor_pkg['vendor']
 
     if project.version is not None:
-        project_descriptor['version'] = project.version
-    elif 'version' in project_descriptor:
-        project.version = project_descriptor['version']
+        project_descriptor_pkg['version'] = project.version
+    elif 'version' in project_descriptor_pkg:
+        project.version = project_descriptor_pkg['version']
 
     if project.publish_to is not None:
-        project_descriptor['publish_to'] = project.publish_to.split(',')
-    elif 'publish_to' in project_descriptor:
-        project.publish_to = ','.join(project_descriptor['publish_to'])
+        project_descriptor_pkg['publish_to'] = project.publish_to.split(',')
+    elif 'publish_to' in project_descriptor_pkg:
+        project.publish_to = ','.join(project_descriptor_pkg['publish_to'])
+    else:
+        project.publish_to = "personal"  # maintain backward compatibility
 
     if project.repo_url is not None:
-        project_descriptor['repo_url'] = project.repo_url
-    elif 'repo_url' in project_descriptor:
-        project.repo_url = project_descriptor['repo_url']
+        project_descriptor_pkg['repo_url'] = project.repo_url
+    elif 'repo_url' in project_descriptor_pkg:
+        project.repo_url = project_descriptor_pkg['repo_url']
 
     write_project_descriptor(project, project_descriptor)
 
@@ -195,18 +201,22 @@ def load_schemas():
     """ Loads the schemas congigured under "schemas" from the schema remotes """
     schemas[SCHEMA_ID_VNF] = []
     schemas[SCHEMA_ID_NS] = []
+
+    s = requests.session()
+
     for schema in get_config()["schemas"]:
         # load vnf schema
         vnf_schema = dict(schema)
-        response = request.urlopen(vnf_schema['url'] + "function-descriptor/vnfd-schema.yml")
-        data = response.read()
-        vnf_schema['schema'] = yaml.safe_load(data.decode('utf-8'))
+        response = s.get(vnf_schema['url'] + "function-descriptor/vnfd-schema.yml")
+        data = response.text
+        vnf_schema['schema'] = yaml.safe_load(data)
         schemas[SCHEMA_ID_VNF].append(vnf_schema)
+
         # load ns schema
         ns_schema = dict(schema)
-        response = request.urlopen(ns_schema['url'] + "service-descriptor/nsd-schema.yml")
-        data = response.read()
-        ns_schema['schema'] = yaml.safe_load(data.decode('utf-8'))
+        response = s.get(vnf_schema['url'] + "service-descriptor/nsd-schema.yml")
+        data = response.text
+        ns_schema['schema'] = yaml.safe_load(data)
         schemas[SCHEMA_ID_NS].append(ns_schema)
 
 
