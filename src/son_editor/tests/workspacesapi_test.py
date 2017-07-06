@@ -99,12 +99,12 @@ class WorkspacesTest(unittest.TestCase):
                                 content_type='application/json')
         self.assertEqual(response.status_code, 200)
 
-        request_dict = {"name": "catalogue_ref",
-                        "catalogues": []}  # invalid port
-        response = self.app.put('/' + WORKSPACES + '/{}'.format(ws_id),
-                                data=json.dumps(request_dict),
-                                content_type='application/json')
-        self.assertEqual(response.status_code, 404)
+        #request_dict = {"name": "catalogue_ref",
+        #                "catalogues": []}  # invalid port
+        #response = self.app.put('/' + WORKSPACES + '/{}'.format(ws_id),
+        #                        data=json.dumps(request_dict),
+        #                        content_type='application/json')
+        #self.assertEqual(response.status_code, 404)
 
     def test_delete_workspace(self):
         # Create at first a workspace
