@@ -85,10 +85,8 @@ class WorkspacesTest(unittest.TestCase):
                                             data=json.dumps(request_dict),
                                             content_type="application/json").data.decode())
         ws_id = response["id"]
-        cat_name = response["catalogues"][0]['name']
-        cat_id = response["catalogues"][0]['id']
         response = self.app.post('/' + WORKSPACES + '/{}'.format(ws_id) + "/" + PROJECTS + "/",
-                                 data=json.dumps({"name": "project", "publish_to": [cat_name]}),
+                                 data=json.dumps({"name": "project", "publish_to": []}),
                                  content_type='application/json')
         self.assertEqual(201, response.status_code)
         response = self.app.put('/' + WORKSPACES + '/{}'.format(ws_id), data={"name": "catalogue_ref"})
