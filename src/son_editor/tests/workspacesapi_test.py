@@ -80,9 +80,7 @@ class WorkspacesTest(unittest.TestCase):
 
         # try to delete referenced catalogue
         request_dict = {"name": "catalogue_ref",
-                        "catalogues": [
-                            {"name": "cat_name",
-                             "url": "http://fg-cn-sandman2.cs.upb.de:4012/"}]}
+                        "catalogues": []}
         response = json.loads(self.app.post('/' + WORKSPACES + '/',
                                             data=json.dumps(request_dict),
                                             content_type="application/json").data.decode())
@@ -97,20 +95,14 @@ class WorkspacesTest(unittest.TestCase):
         self.assertEqual(400, response.status_code)
 
         request_dict = {"name": "catalogue_ref",
-                        "catalogues": [
-                            {"id": cat_id,
-                             "name": "new_name",
-                             "url": "http://fg-cn-sandman2.cs.upb.de:4012/"}]}
+                        "catalogues": []}
         response = self.app.put('/' + WORKSPACES + '/{}'.format(ws_id),
                                 data=json.dumps(request_dict),
                                 content_type='application/json')
         self.assertEqual(response.status_code, 200)
 
         request_dict = {"name": "catalogue_ref",
-                        "catalogues": [
-                            {"id": cat_id,
-                             "name": "new_name",
-                             "url": "http://fg-cn-sandman2.cs.upb.de:4011/"}]}  # invalid port
+                        "catalogues": []}  # invalid port
         response = self.app.put('/' + WORKSPACES + '/{}'.format(ws_id),
                                 data=json.dumps(request_dict),
                                 content_type='application/json')
