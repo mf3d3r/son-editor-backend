@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/sonata-nfv/son-editor-backend.svg?branch=master)](https://travis-ci.org/sonata-nfv/son-editor-backend.svg?branch=master)
+[![Build Status](https://travis-ci.org/sonata-nfv/son-editor-backend.svg?branch=master)](https://travis-ci.org/sonata-nfv/son-editor-backend)
 
 
 # son-editor-backend
@@ -15,7 +15,7 @@ The editor (frontend and backend) can be installed and deployed as single Docker
     * Chose an application name: `SONATA Editor`
     * Configure the URL of your installation: `http://localhost/` or `http://your-domain.com`
     * Configure the authentication callback URL: `http://localhost/backend/login` or `http://your-domain.com/backend/login`
-    * `Save` and collect the generated `ClientID` and `ClientSecretnt` for step 4
+    * `Save` and collect the generated `ClientID` and `ClientSecret` for step 4
 2. Clone this repository:
     * `git clone https://github.com/sonata-nfv/son-editor-backend`
 3. Switch to `son-editor-backend` folder:
